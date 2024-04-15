@@ -66,7 +66,8 @@ Widget reusableText(String text) {
   );
 }
 
-Widget reusableTextField(String hintText, String textType, String iconName) {
+Widget reusableTextField(String hintText, String textType, String iconName,
+    void Function(String value)? func) {
   return Container(
     width: 325.w,
     height: 50.h,
@@ -88,11 +89,12 @@ Widget reusableTextField(String hintText, String textType, String iconName) {
           height: 40.h,
           margin: const EdgeInsets.only(top: 7),
           child: TextField(
+            onChanged: (value) => func!(value),
             keyboardType: TextInputType.multiline,
             decoration: InputDecoration(
                 hintText: hintText,
-                hintStyle:
-                    TextStyle(color: AppColors.primarySecondaryElementText),
+                hintStyle: const TextStyle(
+                    color: AppColors.primarySecondaryElementText),
                 border: const OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.transparent),
                 ),

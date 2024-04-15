@@ -4,11 +4,20 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning/app_blocs.dart';
 import 'package:ulearning/app_events.dart';
 import 'package:ulearning/app_states.dart';
+import 'package:ulearning/pages/sign_in/bloc/sign_in_blocs.dart';
 import 'package:ulearning/pages/sign_in/sign_in.dart';
 import 'package:ulearning/pages/welcome/bloc/welcome_blocs.dart';
 import 'package:ulearning/pages/welcome/welcome.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+      options: const FirebaseOptions(
+          apiKey: "AIzaSyD3nkTgehwADkeF13QhpgVOwkk6Jlnwa4E",
+          appId: '790597821762:android:6ca4865b4e7cf35c9314db',
+          messagingSenderId: '790597821762',
+          projectId: 'ulearing-app-eb4b2'));
   runApp(const MyApp());
 }
 
@@ -28,6 +37,9 @@ class MyApp extends StatelessWidget {
             //lazy: false,
             create: (context) => AppBlocs(),
           ),
+          BlocProvider(
+              //lazy: false
+              create: (context) => SignInBloc()),
         ],
         child: ScreenUtilInit(
           builder: (context, child) => MaterialApp(

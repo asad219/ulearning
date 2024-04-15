@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "790597821762",
+    "project_id": "ulearing-app-eb4b2",
+    "storage_bucket": "ulearing-app-eb4b2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:790597821762:android:6ca4865b4e7cf35c9314db",
+        "android_client_info": {
+          "package_name": "com.flutter.ulearning"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3nkTgehwADkeF13QhpgVOwkk6Jlnwa4E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
