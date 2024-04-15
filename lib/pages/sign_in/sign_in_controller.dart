@@ -10,14 +10,17 @@ class SignInController {
     try {
       if (type == "email") {
         //BLocProvider.of<SignInBloc>(context).state
-        final state = context.read()<SignInBloc>().state;
+        //final state = BlocProvider.of<SignInBloc>(context).state;
+        final state = context.read<SignInBloc>().state;
         String emailAddress = state.email;
         String password = state.password;
         if (emailAddress.isEmpty) {
           //some warning
+          print("Email address required");
         }
         if (password.isEmpty) {
           //some warning
+          print("Password required");
         }
 
         try {
@@ -26,18 +29,29 @@ class SignInController {
                   email: emailAddress, password: password);
           if (credential.user == null) {
             //some messag here
+            print("User not found");
           }
           //if not verified
           if (!credential.user!.emailVerified) {
             //some message
+            print("email not verified");
           }
           var user = credential.user;
           if (user != null) {
             //we got verified user from firebase
+            print("Verified and retrieve data");
           } else {
             //we have error getting user from firebase
           }
-        } catch (e) {}
+        } on FirebaseAuthException catch (e) {
+          if (e.code == "user-not-found") {
+            print("No user found for that email");
+          } else if (e.code == 'wrong-password') {
+            print('Wrong password provide for that user');
+          } else if (e.code == 'invalid-credential') {
+            print('Invalid credential');
+          }
+        }
       }
     } catch (e) {}
   }

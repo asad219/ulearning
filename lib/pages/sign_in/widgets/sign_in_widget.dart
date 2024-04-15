@@ -137,9 +137,10 @@ Widget forgotPassword(String text) {
   );
 }
 
-Widget buildLoginAndSignUpButton(String buttonName, String buttonType) {
+Widget buildLoginAndSignUpButton(
+    String buttonName, String buttonType, void Function()? func) {
   return GestureDetector(
-      onTap: () {},
+      onTap: func,
       child: Container(
         margin: EdgeInsets.only(top: 30.h),
         width: 325.w,
