@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ulearning/common/widgets/toast_messages.dart';
 import 'package:ulearning/pages/sign_in/bloc/sign_in_blocs.dart';
 
 class SignInController {
@@ -35,11 +36,14 @@ class SignInController {
           if (!credential.user!.emailVerified) {
             //some message
             print("email not verified");
+            ToastMessages(
+                msg: 'Email not verified',
+                backgroundColor: const Color(0xFFFF1800));
           }
           var user = credential.user;
           if (user != null) {
             //we got verified user from firebase
-            print("Verified and retrieve data");
+            ToastMessages(msg: 'User found');
           } else {
             //we have error getting user from firebase
           }

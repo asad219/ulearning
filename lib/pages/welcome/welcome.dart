@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning/common/values/colors.dart';
-import 'package:ulearning/main.dart';
 import 'package:ulearning/pages/welcome/bloc/welcome_blocs.dart';
 import 'package:ulearning/pages/welcome/bloc/welcome_events.dart';
 import 'package:ulearning/pages/welcome/bloc/welcome_states.dart';
@@ -25,7 +24,7 @@ class _WelcomeState extends State<Welcome> {
       color: Colors.white,
       child: Scaffold(body: BlocBuilder<WelcomeBloc, WelcomeState>(
         builder: (context, state) {
-          return Container(
+          return SizedBox(
             width: 375.w,
             child: Stack(
               alignment: Alignment.topCenter,
@@ -144,7 +143,7 @@ class _WelcomeState extends State<Welcome> {
                       color: Colors.grey.withOpacity(.1),
                       spreadRadius: 1,
                       blurRadius: 2,
-                      offset: Offset(0, 1))
+                      offset: const Offset(0, 1))
                 ]),
             child: Center(
                 child: Text(
