@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ulearning/common/widgets/common_widgets.dart';
 import 'package:ulearning/pages/sign_in/bloc/sign_in_blocs.dart';
 import 'package:ulearning/pages/sign_in/bloc/sign_in_events.dart';
 import 'package:ulearning/pages/sign_in/bloc/sign_in_states.dart';
 import 'package:ulearning/pages/sign_in/sign_in_controller.dart';
-import 'package:ulearning/pages/sign_in/widgets/sign_in_widget.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -15,6 +15,7 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SignInBloc, SignInState>(builder: (context, state) {
@@ -22,7 +23,7 @@ class _SignInState extends State<SignIn> {
         color: Colors.white,
         child: SafeArea(
           child: Scaffold(
-              appBar: buildAppBar(),
+              appBar: buildAppBar("Login"),
               body: SingleChildScrollView(
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,7 +43,7 @@ class _SignInState extends State<SignIn> {
                                 height: 5.h,
                               ),
                               reusableTextField(
-                                  "Enter your email address", "email", "user",
+                                  "Enter your email address", "email", "email",
                                   (value) {
                                 context
                                     .read<SignInBloc>()
@@ -66,12 +67,14 @@ class _SignInState extends State<SignIn> {
                               SizedBox(
                                 height: 5.h,
                               ),
-                              buildLoginAndSignUpButton("Log In", "login", () {
+                              buildLoginAndSignUpButton("Sign In", "login", () {
                                 SignInController(context: context)
                                     .handleSignIn("email");
                               }),
-                              buildLoginAndSignUpButton(
-                                  "Register", "register", () {})
+                              buildLoginAndSignUpButton("Sign Up", "signup",
+                                  () {
+                                Navigator.of(context).pushNamed("register");
+                              })
                             ]),
                       )
                     ]),

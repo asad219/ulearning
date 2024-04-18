@@ -4,9 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning/app_blocs.dart';
 import 'package:ulearning/app_events.dart';
 import 'package:ulearning/app_states.dart';
-import 'package:ulearning/pages/sign_in/bloc/sign_in_blocs.dart';
+import 'package:ulearning/common/values/colors.dart';
+import 'package:ulearning/pages/bloc_providers.dart';
+import 'package:ulearning/pages/register/register.dart';
 import 'package:ulearning/pages/sign_in/sign_in.dart';
-import 'package:ulearning/pages/welcome/bloc/welcome_blocs.dart';
 import 'package:ulearning/pages/welcome/welcome.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -28,24 +29,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            //lazy: false,
-            create: (context) => WelcomeBloc(),
-          ),
-          BlocProvider(
-            //lazy: false,
-            create: (context) => AppBlocs(),
-          ),
-          BlocProvider(
-              //lazy: false
-              create: (context) => SignInBloc()),
-        ],
+        providers: AppBlocProviders.allProviders,
         child: ScreenUtilInit(
           builder: (context, child) => MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
             theme: ThemeData(
+              appBarTheme: const AppBarTheme(
+                  iconTheme: IconThemeData(color: AppColors.primaryText)),
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
               useMaterial3: true,
             ),
@@ -53,8 +44,9 @@ class MyApp extends StatelessWidget {
             //home: const MyHomePage(), //This is calling statefull widget
             home: const Welcome(),
             routes: {
-              "myHomePage": (context) => const MyHomePage(),
+              //"myHomePage": (context) => const MyHomePage(),
               "signIn": (context) => const SignIn(),
+              "register": (context) => const Register()
             },
           ),
         ));

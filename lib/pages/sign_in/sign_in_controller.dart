@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ulearning/common/widgets/toast_messages.dart';
 import 'package:ulearning/pages/sign_in/bloc/sign_in_blocs.dart';
@@ -17,25 +17,44 @@ class SignInController {
         String password = state.password;
         if (emailAddress.isEmpty) {
           //some warning
-          print("Email address required");
+          ToastMessages(
+              msg: "Email address required",
+              backgroundColor: const Color(0xFFFF1800),
+              textColor: const Color(0xFFFFFFFF));
         }
         if (password.isEmpty) {
           //some warning
-          print("Password required");
+
+          ToastMessages(
+              msg: "Password required",
+              backgroundColor: const Color(0xFFFF1800),
+              textColor: const Color(0xFFFFFFFF));
         }
 
         try {
+          showDialog(
+              context: context,
+              builder: (context) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              });
           final credential = await FirebaseAuth.instance
               .signInWithEmailAndPassword(
                   email: emailAddress, password: password);
+          Navigator.of(context).pop();
           if (credential.user == null) {
             //some messag here
-            print("User not found");
+
+            ToastMessages(
+                msg: "User not found",
+                backgroundColor: const Color(0xFFFF1800),
+                textColor: const Color(0xFFFFFFFF));
           }
           //if not verified
           if (!credential.user!.emailVerified) {
             //some message
-            print("email not verified");
+
             ToastMessages(
                 msg: 'Email not verified',
                 backgroundColor: const Color(0xFFFF1800));
@@ -48,12 +67,22 @@ class SignInController {
             //we have error getting user from firebase
           }
         } on FirebaseAuthException catch (e) {
+          Navigator.of(context).pop();
           if (e.code == "user-not-found") {
-            print("No user found for that email");
+            ToastMessages(
+                msg: "No user found for that email",
+                backgroundColor: const Color(0xFFFF1800),
+                textColor: const Color(0xFFFFFFFF));
           } else if (e.code == 'wrong-password') {
-            print('Wrong password provide for that user');
+            ToastMessages(
+                msg: "Wrong password provide for that user",
+                backgroundColor: const Color(0xFFFF1800),
+                textColor: const Color(0xFFFFFFFF));
           } else if (e.code == 'invalid-credential') {
-            print('Invalid credential');
+            ToastMessages(
+                msg: "Invalid credential",
+                backgroundColor: const Color(0xFFFF1800),
+                textColor: const Color(0xFFFFFFFF));
           }
         }
       }
