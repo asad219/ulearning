@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ulearning/common/values/constants.dart';
 import 'package:ulearning/common/widgets/toast_messages.dart';
+import 'package:ulearning/global.dart';
 import 'package:ulearning/pages/sign_in/bloc/sign_in_blocs.dart';
 
 class SignInController {
@@ -21,6 +23,7 @@ class SignInController {
               msg: "Email address required",
               backgroundColor: const Color(0xFFFF1800),
               textColor: const Color(0xFFFFFFFF));
+          return;
         }
         if (password.isEmpty) {
           //some warning
@@ -29,6 +32,7 @@ class SignInController {
               msg: "Password required",
               backgroundColor: const Color(0xFFFF1800),
               textColor: const Color(0xFFFFFFFF));
+          return;
         }
 
         try {
@@ -50,6 +54,7 @@ class SignInController {
                 msg: "User not found",
                 backgroundColor: const Color(0xFFFF1800),
                 textColor: const Color(0xFFFFFFFF));
+            return;
           }
           //if not verified
           if (!credential.user!.emailVerified) {
@@ -58,11 +63,16 @@ class SignInController {
             ToastMessages(
                 msg: 'Email not verified',
                 backgroundColor: const Color(0xFFFF1800));
+            return;
           }
           var user = credential.user;
           if (user != null) {
+            await Global.storageService
+                .setString(AppConstants.STORAGE_USER_TOKEN_KEY, "1234567890");
             //we got verified user from firebase
-            ToastMessages(msg: 'User found');
+            // ToastMessages(msg: 'User found');
+            Navigator.of(context)
+                .pushNamedAndRemoveUntil("/application", (route) => false);
           } else {
             //we have error getting user from firebase
           }
@@ -84,6 +94,7 @@ class SignInController {
                 backgroundColor: const Color(0xFFFF1800),
                 textColor: const Color(0xFFFFFFFF));
           }
+          return;
         }
       }
     } catch (e) {}

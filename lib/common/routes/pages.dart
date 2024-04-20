@@ -2,7 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ulearning/common/routes/names.dart';
+import 'package:ulearning/common/values/constants.dart';
+import 'package:ulearning/global.dart';
 import 'package:ulearning/pages/application/application_page.dart';
+import 'package:ulearning/pages/application/bloc/app_blocs.dart';
 import 'package:ulearning/pages/register/bloc/register_bloc.dart';
 import 'package:ulearning/pages/register/register.dart';
 import 'package:ulearning/pages/sign_in/bloc/sign_in_blocs.dart';
@@ -26,10 +29,9 @@ class AppPages {
           page: const Register(),
           bloc: BlocProvider(create: (_) => RegisterBlocs())),
       PageEntity(
-        route: AppRoutes.APPLICATION,
-        page: const ApplicationPage(),
-        //bloc: BlocProvider(create: (_) => SignInBloc())
-      )
+          route: AppRoutes.APPLICATION,
+          page: const ApplicationPage(),
+          bloc: BlocProvider(create: (_) => AppBlocs()))
     ];
   }
 
@@ -45,13 +47,24 @@ class AppPages {
   }
 
   //a modal that covers entire screen as we click on navigator object
+
   static MaterialPageRoute GenerateRouteSettings(RouteSettings settings) {
     if (settings.name != null) {
       //check for the route matching when navigator gets triggered.
-      print("Settings Name ${settings.name}");
       var result = routes().where((element) => element.route == settings.name);
-      print(result);
       if (result.isNotEmpty) {
+        //check device open first
+        bool deviceFirstOpen = Global.storageService
+            .getBool(AppConstants.STORAGE_DEVICE_OPEN_FIRST_TIME);
+        if (result.first.route == AppRoutes.INITIAL && deviceFirstOpen) {
+          bool isLoggedIn = Global.storageService.isLoggedIn();
+          if (isLoggedIn) {
+            return MaterialPageRoute(
+                builder: (_) => const ApplicationPage(), settings: settings);
+          }
+          return MaterialPageRoute(
+              builder: (_) => const SignIn(), settings: settings);
+        }
         return MaterialPageRoute(
             builder: (_) => result.first.page, settings: settings);
       }
