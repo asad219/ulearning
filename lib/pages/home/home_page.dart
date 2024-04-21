@@ -13,24 +13,27 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(left: 7.w, right: 7.w),
-      child: SafeArea(
-          child: Scaffold(
-        backgroundColor: AppColors.primaryBackground,
-        appBar: buildAppBar(),
-        body: SingleChildScrollView(
+    return SafeArea(
+        child: Scaffold(
+      backgroundColor: AppColors.primaryBackground,
+      appBar: buildAppBar(),
+      body: SingleChildScrollView(
+        child: Container(
+          margin: EdgeInsets.symmetric(vertical: 0, horizontal: 25.w),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                  child: Text(
-                "Hello",
-                style: TextStyle(fontSize: 14.sp),
-              ))
+              homePageWelcomeText("Hello",
+                  color: AppColors.primaryThreeElementText, top: 20),
+              homePageWelcomeText("Asad Khan", top: 5),
+              SizedBox(
+                height: 20.h,
+              ),
+              searchView()
             ],
           ),
         ),
-      )),
-    );
+      ),
+    ));
   }
 }
