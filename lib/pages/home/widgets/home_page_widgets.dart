@@ -10,7 +10,7 @@ AppBar buildAppBar() {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Icon(Icons.menu),
+          const Icon(Icons.menu),
           GestureDetector(
             onTap: () {},
             child: Container(
@@ -47,7 +47,7 @@ Widget searchView() {
         height: 40.w,
         color: Colors.red,
       ),
-      Container(child: Icon(Icons.search))
+      Container(child: const Icon(Icons.search))
     ],
   );
 }
