@@ -10,9 +10,6 @@ import 'package:ulearning/firebase_options.dart';
 import 'package:ulearning/global.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-      name: "ULearning", options: DefaultFirebaseOptions.currentPlatform);
   await Global.init();
   runApp(const MyApp());
 }
