@@ -56,15 +56,15 @@ class AppPages {
         //check device open first
         bool deviceFirstOpen = Global.storageService
             .getBool(AppConstants.STORAGE_DEVICE_OPEN_FIRST_TIME);
-        if (result.first.route == AppRoutes.INITIAL && deviceFirstOpen) {
-          bool isLoggedIn = Global.storageService.isLoggedIn();
-          if (isLoggedIn) {
-            return MaterialPageRoute(
-                builder: (_) => const ApplicationPage(), settings: settings);
-          }
-          return MaterialPageRoute(
-              builder: (_) => const SignIn(), settings: settings);
-        }
+        // if (result.first.route == AppRoutes.INITIAL && deviceFirstOpen) {
+        //   bool isLoggedIn = Global.storageService.isLoggedIn();
+        //   if (isLoggedIn) {
+        //     return MaterialPageRoute(
+        //         builder: (_) => const ApplicationPage(), settings: settings);
+        //   }
+        //   return MaterialPageRoute(
+        //       builder: (_) => const SignIn(), settings: settings);
+        // }
         return MaterialPageRoute(
             builder: (_) => result.first.page, settings: settings);
       }

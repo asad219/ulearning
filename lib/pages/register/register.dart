@@ -86,11 +86,11 @@ class _RegisterState extends State<Register> {
                                   height: 5.h,
                                 ),
                                 reusableText(
-                                    "Enter your details below and free sign up"),
+                                    "By creating an account you have to agree with our term & condition."),
                                 SizedBox(
                                   height: 5.h,
                                 ),
-                                buildLoginAndSignUpButton("Sign Up", "signup",
+                                buildLoginAndSignUpButton("Sign Up", "login",
                                     () {
                                   RegisterController(context: context)
                                       .handleEmailRegister();

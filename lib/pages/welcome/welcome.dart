@@ -62,7 +62,7 @@ class _WelcomeState extends State<Welcome> {
                   ],
                 ),
                 Positioned(
-                    bottom: 80.h,
+                    bottom: 80,
                     child: DotsIndicator(
                       position: state.page,
                       dotsCount: 3,
@@ -103,6 +103,9 @@ class _WelcomeState extends State<Welcome> {
                 fontWeight: FontWeight.normal),
           ),
         ),
+        SizedBox(
+          height: 20,
+        ),
         Container(
           padding: EdgeInsets.only(left: 30.w, right: 30.w),
           width: 375.w,
@@ -113,6 +116,9 @@ class _WelcomeState extends State<Welcome> {
                 fontSize: 12.sp,
                 fontWeight: FontWeight.normal),
           ),
+        ),
+        SizedBox(
+          height: 20,
         ),
         GestureDetector(
           onTap: () {
@@ -132,7 +138,7 @@ class _WelcomeState extends State<Welcome> {
             }
           },
           child: Container(
-            margin: EdgeInsets.only(top: 100.w, left: 25.w, right: 25.w),
+            margin: EdgeInsets.only(left: 25.w, right: 25.w),
             width: 325.w,
             height: 50.h,
             decoration: BoxDecoration(

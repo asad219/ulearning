@@ -10,9 +10,6 @@ import 'package:ulearning/firebase_options.dart';
 import 'package:ulearning/global.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-      name: "ULearning", options: DefaultFirebaseOptions.currentPlatform);
   await Global.init();
   runApp(const MyApp());
 }
@@ -27,6 +24,7 @@ class MyApp extends StatelessWidget {
         //providers: AppBlocProviders.allProviders,
         providers: [...AppPages.allBlocProviders(context)],
         child: ScreenUtilInit(
+          designSize: const Size(375, 812),
           builder: (context, child) => MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
