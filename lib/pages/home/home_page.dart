@@ -19,7 +19,8 @@ class _HomePageState extends State<HomePage> {
       appBar: buildAppBar(),
       body: SingleChildScrollView(
         child: Container(
-          margin: EdgeInsets.symmetric(vertical: 0, horizontal: 25.w),
+          margin: EdgeInsets.symmetric(vertical: 0, horizontal: 20.w),
+          width: 325.w,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -29,7 +30,11 @@ class _HomePageState extends State<HomePage> {
               SizedBox(
                 height: 20.h,
               ),
-              searchView()
+              searchView(),
+              SizedBox(
+                height: 20.h,
+              ),
+              slidersView()
             ],
           ),
         ),

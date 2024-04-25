@@ -41,15 +41,15 @@ Widget homePageWelcomeText(String text,
 }
 
 Widget searchView() {
-  return Row(
-    children: [
-      Container(
-        decoration: BoxDecoration(
-            color: AppColors.primaryBackground,
-            borderRadius: BorderRadius.circular(15),
-            border:
-                Border.all(width: 1, color: AppColors.primaryFourElementText)),
-        child: Row(
+  return Container(
+    //margin: const EdgeInsets.only(right: 13),
+    decoration: BoxDecoration(
+        color: AppColors.primaryBackground,
+        borderRadius: BorderRadius.circular(15),
+        border: Border.all(width: 1, color: AppColors.primaryFourElementText)),
+    child: Row(
+      children: [
+        Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
@@ -89,25 +89,57 @@ Widget searchView() {
             )
           ],
         ),
-      ),
-      const SizedBox(
-        width: 5,
-      ),
-      Container(
-        height: 40.h,
-        width: 40.w,
-        decoration: BoxDecoration(
-            color: AppColors.primaryElement,
-            borderRadius: BorderRadius.circular(13.w),
-            border: Border.all(color: AppColors.primaryElement)),
-        child: GestureDetector(
-          child: Image.asset(
-            'assets/icons/options.png',
-            height: 1.h,
-            width: 1.w,
-          ),
+        const SizedBox(
+          width: 17,
         ),
-      )
-    ],
+        Container(
+          height: 35.h,
+          width: 35.w,
+          decoration: BoxDecoration(
+              color: AppColors.primaryElement,
+              borderRadius: BorderRadius.circular(12.w),
+              border: Border.all(color: AppColors.primaryElement)),
+          child: GestureDetector(
+            onTap: () {
+              print("Clicked filter button");
+            },
+            child: Container(
+              padding: const EdgeInsets.all(7),
+              child: SizedBox(
+                child: Image.asset(
+                  'assets/icons/options.png',
+                  height: 1.h,
+                  width: 1.w,
+                ),
+              ),
+            ),
+          ),
+        )
+      ],
+    ),
   );
+}
+
+Widget slidersView() {
+  return Container(
+    width: 325.w,
+    height: 160.h,
+    child: PageView(
+      scrollDirection: Axis.horizontal,
+      children: [
+        _sliderContainer(path: "assets/icons/art.png"),
+        _sliderContainer(path: "assets/icons/image_1.png"),
+        _sliderContainer(path: "assets/icons/image_2.png")
+      ],
+    ),
+  );
+}
+
+Widget _sliderContainer({String path = "assets/icons/art.png"}) {
+  return Container(
+      width: 325.w,
+      height: 160.h,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(20.h)),
+          image: DecorationImage(fit: BoxFit.fill, image: AssetImage(path))));
 }
