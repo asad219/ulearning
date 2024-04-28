@@ -1,3 +1,4 @@
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -122,14 +123,33 @@ Widget searchView() {
 
 Widget slidersView() {
   return Container(
-    width: 325.w,
-    height: 160.h,
-    child: PageView(
-      scrollDirection: Axis.horizontal,
+    child: Column(
       children: [
-        _sliderContainer(path: "assets/icons/art.png"),
-        _sliderContainer(path: "assets/icons/image_1.png"),
-        _sliderContainer(path: "assets/icons/image_2.png")
+        Container(
+          width: 325.w,
+          height: 160.h,
+          child: PageView(
+            scrollDirection: Axis.horizontal,
+            children: [
+              _sliderContainer(path: "assets/icons/art.png"),
+              _sliderContainer(path: "assets/icons/image_1.png"),
+              _sliderContainer(path: "assets/icons/image_2.png")
+            ],
+          ),
+        ),
+        Container(
+          child: DotsIndicator(
+            dotsCount: 3,
+            position: 1,
+            decorator: DotsDecorator(
+                color: AppColors.primaryThreeElementText,
+                activeColor: AppColors.primaryElement,
+                size: const Size.square(5.0),
+                activeSize: const Size(17.0, 5.0),
+                activeShape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5))),
+          ),
+        )
       ],
     ),
   );
