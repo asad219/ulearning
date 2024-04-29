@@ -1,9 +1,14 @@
 import 'package:dots_indicator/dots_indicator.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning/common/values/colors.dart';
 import 'package:ulearning/common/widgets/common_widgets.dart';
+import 'package:ulearning/pages/home/bloc/home_page_blocs.dart';
+import 'package:ulearning/pages/home/bloc/home_page_events.dart';
+import 'package:ulearning/pages/home/bloc/home_page_states.dart';
 
 AppBar buildAppBar() {
   return AppBar(
@@ -121,7 +126,7 @@ Widget searchView() {
   );
 }
 
-Widget slidersView() {
+Widget slidersView(BuildContext context, HomePageStates state) {
   return Container(
     child: Column(
       children: [
@@ -129,6 +134,9 @@ Widget slidersView() {
           width: 325.w,
           height: 160.h,
           child: PageView(
+            onPageChanged: (value) {
+              context.read<HomePageBlocs>().add(HomePageDots(value));
+            },
             scrollDirection: Axis.horizontal,
             children: [
               _sliderContainer(path: "assets/icons/art.png"),
@@ -140,7 +148,7 @@ Widget slidersView() {
         Container(
           child: DotsIndicator(
             dotsCount: 3,
-            position: 1,
+            position: state.index,
             decorator: DotsDecorator(
                 color: AppColors.primaryThreeElementText,
                 activeColor: AppColors.primaryElement,
@@ -162,4 +170,70 @@ Widget _sliderContainer({String path = "assets/icons/art.png"}) {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(20.h)),
           image: DecorationImage(fit: BoxFit.fill, image: AssetImage(path))));
+}
+
+Widget menuView() {
+  return Column(
+    children: [
+      Container(
+        width: 325.w,
+        margin: EdgeInsets.only(top: 15.h),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            _resuableText("Choose your course",
+                fs: 16, fw: FontWeight.bold, color: AppColors.primaryText),
+            GestureDetector(
+              onTap: () {
+                print("Clicked on See all");
+              },
+              child: _resuableText("See all",
+                  fs: 14,
+                  fw: FontWeight.normal,
+                  color: AppColors.primaryElement),
+            ),
+          ],
+        ),
+      ),
+      Container(
+        width: 325.w,
+        margin: EdgeInsets.only(top: 15.h),
+        child: Row(
+          children: [
+            _resuableMenuText("All"),
+            _resuableMenuText("Popular",
+                textColor: AppColors.primaryFourElementText,
+                backgroundColor: AppColors.primaryElementText),
+            _resuableMenuText("Newest",
+                textColor: AppColors.primaryFourElementText,
+                backgroundColor: AppColors.primaryElementText)
+          ],
+        ),
+      ),
+    ],
+  );
+}
+
+Widget _resuableText(String text,
+    {int fs = 16,
+    FontWeight fw = FontWeight.bold,
+    Color color = AppColors.primaryText}) {
+  return Text(
+    text,
+    style: TextStyle(color: color, fontSize: fs.sp, fontWeight: fw),
+  );
+}
+
+Widget _resuableMenuText(String menuText,
+    {Color textColor = AppColors.primaryElementText,
+    Color backgroundColor = AppColors.primaryElement}) {
+  return Container(
+      margin: EdgeInsets.only(right: 20.w),
+      padding: EdgeInsets.only(top: 5.h, right: 15.w, bottom: 5.h, left: 15.w),
+      decoration: BoxDecoration(
+        color: backgroundColor,
+        borderRadius: BorderRadius.circular(7.w),
+      ),
+      child: _resuableText(menuText,
+          fs: 11, fw: FontWeight.normal, color: textColor));
 }
