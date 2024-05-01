@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning/common/values/colors.dart';
@@ -22,31 +23,37 @@ class _HomePageState extends State<HomePage> {
       appBar: buildAppBar(),
       body: BlocBuilder<HomePageBlocs, HomePageStates>(
         builder: (context, state) {
-          return SingleChildScrollView(
-            child: Container(
-              margin: EdgeInsets.symmetric(vertical: 0, horizontal: 20.w),
-              width: 325.w,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  homePageWelcomeText("Hello",
-                      color: AppColors.primaryThreeElementText, top: 20),
-                  homePageWelcomeText("Asad Khan", top: 5),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  searchView(),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  slidersView(context, state),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  menuView()
-                ],
+          return Container(
+            margin: EdgeInsets.symmetric(vertical: 0, horizontal: 20.w),
+            width: 325.w,
+            child: CustomScrollView(slivers: [
+              SliverToBoxAdapter(
+                child: homePageWelcomeText("Hello",
+                    color: AppColors.primaryThreeElementText, top: 20),
               ),
-            ),
+              SliverToBoxAdapter(
+                  child: homePageWelcomeText("Asad Khan", top: 5)),
+              SliverPadding(padding: EdgeInsets.only(top: 20.h)),
+              SliverToBoxAdapter(child: searchView()),
+              SliverPadding(padding: EdgeInsets.only(top: 20.h)),
+              SliverToBoxAdapter(child: slidersView(context, state)),
+              SliverPadding(padding: EdgeInsets.only(top: 20.h)),
+              SliverToBoxAdapter(child: menuView()),
+              SliverPadding(
+                padding: EdgeInsets.symmetric(vertical: 18.h, horizontal: 0.w),
+                sliver: SliverGrid(
+                    delegate: SliverChildBuilderDelegate(childCount: 4,
+                        (context, index) {
+                      return GestureDetector(onTap: () {}, child: courseGrid());
+                    }),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            childAspectRatio: 1.6,
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 15,
+                            crossAxisSpacing: 10)),
+              )
+            ]),
           );
         },
       ),
