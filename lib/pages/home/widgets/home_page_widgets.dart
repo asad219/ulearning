@@ -58,7 +58,7 @@ Widget searchView() {
             Container(
                 margin: const EdgeInsets.only(left: 7),
                 child: const Icon(Icons.search)),
-            Container(
+            SizedBox(
               width: 240.w,
               height: 40.w,
               child: TextField(
@@ -127,7 +127,7 @@ Widget slidersView(BuildContext context, HomePageStates state) {
   return Container(
     child: Column(
       children: [
-        Container(
+        SizedBox(
           width: 325.w,
           height: 160.h,
           child: PageView(

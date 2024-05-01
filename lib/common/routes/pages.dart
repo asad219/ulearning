@@ -8,6 +8,7 @@ import 'package:ulearning/pages/application/application_page.dart';
 import 'package:ulearning/pages/application/bloc/app_blocs.dart';
 import 'package:ulearning/pages/home/bloc/home_page_blocs.dart';
 import 'package:ulearning/pages/home/home_page.dart';
+import 'package:ulearning/pages/profile/profile.dart';
 import 'package:ulearning/pages/register/bloc/register_bloc.dart';
 import 'package:ulearning/pages/register/register.dart';
 import 'package:ulearning/pages/sign_in/bloc/sign_in_blocs.dart';
@@ -37,6 +38,10 @@ class AppPages {
       PageEntity(
           route: AppRoutes.HOME_PAGE,
           page: const HomePage(),
+          bloc: BlocProvider(create: (_) => HomePageBlocs())),
+      PageEntity(
+          route: AppRoutes.PROFILE_PAGE,
+          page: const Profile(),
           bloc: BlocProvider(create: (_) => HomePageBlocs()))
     ];
   }
@@ -75,7 +80,6 @@ class AppPages {
             builder: (_) => result.first.page, settings: settings);
       }
     }
-    print("Settings Name ${settings.name}");
     return MaterialPageRoute(
         builder: (_) => const SignIn(), settings: settings);
   }
