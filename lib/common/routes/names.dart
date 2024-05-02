@@ -11,4 +11,6 @@ class AppRoutes {
   static const HOME_PAGE = "/home_page";
   //profile page
   static const PROFILE_PAGE = "/profile";
+  //settings page
+  static const SETTINGS_PAGE = "/settings";
 }

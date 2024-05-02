@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning/common/values/colors.dart';
 import 'package:ulearning/pages/profile/widgets/profile_widgets.dart';
 
@@ -13,6 +14,7 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.primaryFourElementText.withOpacity(.2),
       appBar: buildAppBar("Profile Page"),
       body: SingleChildScrollView(
           child: Container(
@@ -20,26 +22,12 @@ class _ProfileState extends State<Profile> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              margin: const EdgeInsets.only(top: 40),
-              width: 200,
-              height: 200,
-              decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                      image: NetworkImage(
-                          'https://img-c.udemycdn.com/user/200_H/27431488_2441.jpg'))),
+            profileIconAndEditWidget(),
+            const SizedBox(
+              height: 20,
             ),
-            SizedBox(
-              height: 10,
-            ),
-            const Text(
-              "Asad Ullah Khan",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                  color: AppColors.primaryElement),
-            ),
+            const Text("Asad Khan"),
+            buildListView(context)
           ],
         ),
       )),
