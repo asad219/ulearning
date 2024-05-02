@@ -90,10 +90,10 @@ Widget _listView(String title, IconData iconData) {
               color: AppColors.primaryBlue,
               borderRadius: BorderRadius.circular(5)),
           margin: const EdgeInsets.only(right: 20),
-          width: 40.w,
-          height: 40.w,
+          width: 35.w,
+          height: 35.h,
           child: Icon(
-            size: 30,
+            size: 25,
             iconData,
             color: AppColors.primaryElementText,
           ),
