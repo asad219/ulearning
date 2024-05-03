@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning/common/values/colors.dart';
+import 'package:ulearning/common/widgets/base_text_widget.dart';
 import 'package:ulearning/pages/profile/widgets/profile_widgets.dart';
 
 class Profile extends StatefulWidget {
@@ -26,7 +27,7 @@ class _ProfileState extends State<Profile> {
             const SizedBox(
               height: 20,
             ),
-            const Text("Asad Khan"),
+            reusableText("Asad Khan"),
             buildListView(context)
           ],
         ),

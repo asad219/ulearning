@@ -53,19 +53,6 @@ Widget _resuableIcons(String iconName) {
   );
 }
 
-Widget reusableText(String text) {
-  return Container(
-    margin: EdgeInsets.only(bottom: 5.h),
-    child: Text(
-      text,
-      style: TextStyle(
-          color: Colors.grey.withOpacity(0.9),
-          fontWeight: FontWeight.normal,
-          fontSize: 14.sp),
-    ),
-  );
-}
-
 Widget reusableTextField(String hintText, String textType, String iconName,
     void Function(String value)? func) {
   return Container(

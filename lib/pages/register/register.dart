@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ulearning/common/widgets/base_text_widget.dart';
 import 'package:ulearning/common/widgets/common_widgets.dart';
 import 'package:ulearning/pages/register/bloc/register_bloc.dart';
 import 'package:ulearning/pages/register/bloc/register_events.dart';

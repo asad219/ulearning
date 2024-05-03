@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning/common/values/colors.dart';
+import 'package:ulearning/common/widgets/base_text_widget.dart';
 import 'package:ulearning/pages/home/bloc/home_page_blocs.dart';
 import 'package:ulearning/pages/home/bloc/home_page_events.dart';
 import 'package:ulearning/pages/home/bloc/home_page_states.dart';
@@ -36,11 +37,7 @@ Widget homePageWelcomeText(String text,
     {Color color = AppColors.primaryText, int top = 20}) {
   return Container(
       margin: EdgeInsets.only(top: top.h),
-      child: Text(
-        text,
-        style: TextStyle(
-            fontSize: 24.sp, fontWeight: FontWeight.bold, color: color),
-      ));
+      child: reusableText(text, color: color));
 }
 
 Widget searchView() {
@@ -83,7 +80,7 @@ Widget searchView() {
                     )),
                 style: TextStyle(
                     color: AppColors.primaryText,
-                    fontFamily: "Avenir",
+                    fontFamily: "Tenor Sans",
                     fontWeight: FontWeight.normal,
                     fontSize: 14.sp),
                 autocorrect: false,
@@ -178,13 +175,13 @@ Widget menuView() {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            _resuableText("Choose your course",
+            reusableText("Choose your course",
                 fs: 16, fw: FontWeight.bold, color: AppColors.primaryText),
             GestureDetector(
               onTap: () {
                 print("Clicked on See all");
               },
-              child: _resuableText("See all",
+              child: reusableText("See all",
                   fs: 14,
                   fw: FontWeight.normal,
                   color: AppColors.primaryElement),
@@ -211,16 +208,6 @@ Widget menuView() {
   );
 }
 
-Widget _resuableText(String text,
-    {int fs = 16,
-    FontWeight fw = FontWeight.bold,
-    Color color = AppColors.primaryText}) {
-  return Text(
-    text,
-    style: TextStyle(color: color, fontSize: fs.sp, fontWeight: fw),
-  );
-}
-
 Widget _resuableMenuText(String menuText,
     {Color textColor = AppColors.primaryElementText,
     Color backgroundColor = AppColors.primaryElement}) {
@@ -231,8 +218,8 @@ Widget _resuableMenuText(String menuText,
         color: backgroundColor,
         borderRadius: BorderRadius.circular(7.w),
       ),
-      child: _resuableText(menuText,
-          fs: 11, fw: FontWeight.normal, color: textColor));
+      child: reusableText(menuText,
+          fs: 11, fw: FontWeight.bold, color: textColor));
 }
 
 Widget courseGrid() {

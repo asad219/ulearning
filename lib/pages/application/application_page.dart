@@ -49,8 +49,14 @@ class _ApplicationPageState extends State<ApplicationPage> {
                             context.read<AppBlocs>().add(TriggerAppEvent(value))
                           },
                       elevation: 0,
+                      selectedLabelStyle: const TextStyle(
+                          fontFamily: 'Tenor Sans',
+                          color: AppColors.primaryText,
+                          fontSize: 14),
                       unselectedLabelStyle: const TextStyle(
-                          color: AppColors.primaryText, fontSize: 14),
+                          fontFamily: 'Tenor Sans',
+                          color: AppColors.primaryText,
+                          fontSize: 14),
                       //  backgroundColor: AppColors.primarySecondaryBackground,
                       //fixedColor: AppColors.primaryText,
                       unselectedItemColor: AppColors.primaryFourElementText,

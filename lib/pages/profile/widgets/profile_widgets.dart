@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning/common/routes/routes.dart';
 
 import 'package:ulearning/common/values/colors.dart';
+import 'package:ulearning/common/widgets/base_text_widget.dart';
 
 AppBar buildAppBar(String title) {
   return AppBar(
@@ -15,7 +16,7 @@ AppBar buildAppBar(String title) {
             height: 12.h,
             child: Image.asset("assets/icons/menu.png"),
           ),
-          Text(title),
+          reusableText(title),
           SizedBox(
             width: 18.w,
             height: 18.h,
@@ -99,10 +100,7 @@ Widget _listView(String title, IconData iconData) {
           ),
         ),
         Container(
-          child: Text(
-            title,
-            style: TextStyle(fontSize: 16),
-          ),
+          child: reusableText(title, fs: 14, fw: FontWeight.normal),
         )
       ],
     ),
