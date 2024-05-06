@@ -43,6 +43,8 @@ dependencies:
   firebase_auth: 
   fluttertoast:
   shared_preferences: ^2.2.3
+  flutter_easyloading: ^3.0.5
+  dio: ^5.4.3+1
 
 
 dev_dependencies:

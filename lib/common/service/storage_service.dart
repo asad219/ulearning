@@ -1,4 +1,8 @@
+import 'dart:convert';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ulearning/common/entities/entities.dart';
 import 'package:ulearning/common/values/constants.dart';
 
 class StorageService {
@@ -28,5 +32,14 @@ class StorageService {
 
   Future<bool> remove(String key) {
     return _pref.remove(key);
+  }
+
+  UserItem getUserProfile() {
+    var profileOffline =
+        _pref.getString(AppConstants.STORAGE_USER_PROFILE_KEY) ?? "";
+    if (profileOffline.isNotEmpty) {
+      return UserItem.fromJson(jsonDecode(profileOffline));
+    }
+    return UserItem();
   }
 }

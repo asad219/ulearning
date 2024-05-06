@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning/common/values/colors.dart';
 import 'package:ulearning/pages/home/bloc/home_page_blocs.dart';
 import 'package:ulearning/pages/home/bloc/home_page_states.dart';
+import 'package:ulearning/pages/home/home_controller.dart';
 import 'package:ulearning/pages/home/widgets/home_page_widgets.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,6 +16,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late HomeController _homeController;
+  @override
+  void initState() {
+    super.initState();
+    _homeController = HomeController(context: context);
+    _homeController.initt();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -31,8 +40,9 @@ class _HomePageState extends State<HomePage> {
                 child: homePageWelcomeText("Hello",
                     color: AppColors.primaryThreeElementText, top: 20),
               ),
-              SliverToBoxAdapter(
-                  child: homePageWelcomeText("Asad Khan", top: 5)),
+              // SliverToBoxAdapter(
+              //     child: homePageWelcomeText(_homeController.userProfile.name!,
+              //         top: 5)),
               SliverPadding(padding: EdgeInsets.only(top: 20.h)),
               SliverToBoxAdapter(child: searchView()),
               SliverPadding(padding: EdgeInsets.only(top: 20.h)),
