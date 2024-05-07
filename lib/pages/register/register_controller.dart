@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ulearning/common/values/constants.dart';
 import 'package:ulearning/common/widgets/toast_messages.dart';
 import 'package:ulearning/pages/register/bloc/register_bloc.dart';
 
@@ -43,6 +44,7 @@ class RegisterController {
       if (credential.user != null) {
         await credential.user?.sendEmailVerification();
         await credential.user?.updateDisplayName(userName);
+        String photoUrl = "${AppConstants.SERVER_API_URL}uploads/default.png";
         ToastMessages(msg: "Activate your account, please check your email");
         Navigator.of(context).pop();
         Navigator.of(context).pop();
